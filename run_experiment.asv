@@ -13,7 +13,7 @@ save(['C:\Users\lt1686\Documents\GitHub\categorization\stimulus_',d,'.mat'],...
 
 %% Draw pixels (this is actually just work in progress)
 
-ndraws=200; if mod(image_size,2)==0; pad=1; else, pad=0; end
+ndraws=5; if mod(image_size,2)==0; pad=1; else, pad=0; end
 rands=rand_draw(ndraws,image_size); 
 [rows,cols]=ind2sub([image_size+pad,image_size+pad],rands);
 
@@ -22,11 +22,8 @@ samples=nan(image_size+pad);
 for draw=1:ndraws
     samples(rows(draw),cols(draw))=stimulus{1,1}(rows(draw),cols(draw));
 end
-figure; p=pcolor(samples); cmap=[linspace(clr1(1),clr2(1),256);...
+figure; pcolor(samples); cmap=[linspace(clr1(1),clr2(1),256);...
     linspace(clr1(2),clr2(2),256);linspace(clr1(3),clr2(3),256)]';
 set(gca,'color','w','fontsize',18,'Tickdir','out','Ticklength',[.03 .03],...
     'XColor','none','YColor','none'); colormap(cmap); 
-set(gcf,'color','w','InvertHardCopy','off'); axis equal; 
-hold on; xline(image_size+pad,'color','k'); set(p,'EdgeColor','none')
-xline(0,'color','k'); yline(0,'color','k'); yline(image_size+pad,'color','k')
-xlim([-1 image_size+pad+1]); ylim([-1 image_size+pad+1]); 
+set(gcf,'color','w','InvertHardCopy','off'); colorbar; axis equal; box off

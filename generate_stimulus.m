@@ -19,7 +19,7 @@ function stimulus=generate_stimulus(category,image_size,clr1,clr2,lambda_h,lambd
 %   OUTPUT:
 %   stimulus                
 
-%% Process inputs/pre-allocate
+%% Process inputs
 
 if nargin~=6
     if category==0, lambda_h=1.39; lambda_v=1.39;
@@ -34,7 +34,7 @@ end
 
 % generate arrays of evenly spaced coordinates for image rows and columns
 coordinates=-round(image_size/2):round(image_size/2);
-[X,Y]=meshgrid(coordinates); pixels=[X(:),Y(:)];
+[X,Y]=meshgrid(coordinates);
 % compute the covariance function
 covariance=exp(-0.5*((1/lambda_h^2)*(X(:)-X(:)').^2+(1/lambda_v^2)*(Y(:)-Y(:)').^2));
 % draw from the multivariate normal
@@ -42,8 +42,7 @@ stimulus=mvnrnd(zeros(length(coordinates)^2,1),covariance);
 % if any value is outside of [-4,4], resample
 while any(abs(stimulus)>4,'all')
     stimulus=mvnrnd(zeros(length(coordinates)^2,1),covariance);
-end
-stimulus=reshape(stimulus,size(X));
+end; stimulus=reshape(stimulus,size(X));
 
 %% Create the stimulus image
 
@@ -51,4 +50,4 @@ figure; imagesc(stimulus); cmap=[linspace(clr1(1),clr2(1),256);...
     linspace(clr1(2),clr2(2),256);linspace(clr1(3),clr2(3),256)]';
 set(gca,'color','w','fontsize',18,'Tickdir','out','Ticklength',[.03 .03],...
     'XColor','none','YColor','none'); colormap(cmap); box off
-set(gcf,'color','w','InvertHardCopy','off'); colorbar; axis equal; 
+set(gcf,'color','w','InvertHardCopy','off'); axis equal; 
