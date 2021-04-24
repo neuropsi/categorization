@@ -37,11 +37,18 @@ coordinates=-round(image_size/2):round(image_size/2);
 [X,Y]=meshgrid(coordinates); pixels=[X(:),Y(:)];
 % compute the covariance function
 covariance=exp(-0.5*((1/lambda_h^2)*(X(:)-X(:)').^2+(1/lambda_v^2)*(Y(:)-Y(:)').^2));
-% draw from the multivariate normal and reshape into an image
+% draw from the multivariate normal
 stimulus=mvnrnd(zeros(length(coordinates)^2,1),covariance);
+% if any value is outside of [-4,4], resample
+while any(abs(stimulus)>4,'all')
+    stimulus=mvnrnd(zeros(length(coordinates)^2,1),covariance);
+end
 stimulus=reshape(stimulus,size(X));
 
 %% Create the stimulus image
 
-figure; imagesc(stimulus); colorbar; axis equal
-
+figure; imagesc(stimulus); cmap=[linspace(clr1(1),clr2(1),256);...
+    linspace(clr1(2),clr2(2),256);linspace(clr1(3),clr2(3),256)]';
+set(gca,'color','w','fontsize',18,'Tickdir','out','Ticklength',[.03 .03],...
+    'XColor','none','YColor','none'); colormap(cmap); box off
+set(gcf,'color','w','InvertHardCopy','off'); colorbar; axis equal; 
