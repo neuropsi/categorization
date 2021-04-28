@@ -2,7 +2,7 @@ function rands=rand_draw(ndraws,image_size,SD)
 %% RAND_DRAW  Draw samples from an image according to an isotropic Gaussian 
 % distribution centered at (0,0) with a given SD. 
 % 
-%   ARG:
+%   ARGS:
 %   ndraws                  number of pixels to draw
 %   image_size              N, where the image consists of NxN pixels
 %   OPTIONAL ARG:
@@ -24,3 +24,4 @@ probabilities=normpdf(distances,0,SD);
 probabilities=probabilities/sum(probabilities); CDF=cumsum(probabilities);
 % sample pixels according to probabilities
 for sample=1:ndraws, rands(sample)=find(CDF>rand(1),1,'first'); end
+
