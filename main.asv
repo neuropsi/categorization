@@ -4,7 +4,7 @@
 
 %% Perform multiple experiments in parallel and plot outcomes
 
-image_size=77; nstimuli=100; ndraws=[5:5:25]; d=datestr(now,'yyyymmddhhMM');
+image_size=110; nstimuli=50; ndraws=[5:5:25]; d=datestr(now,'yyyymmddhhMM');
 tic; [stimuli,samples,outcomes]=experiment(image_size,nstimuli,ndraws); toc
 save(['C:\Users\lt1686\Documents\GitHub\categorization\experiment_',d,'.mat'],...
     'stimuli','samples','outcomes','-v7.3') % save experiment
@@ -26,8 +26,5 @@ saveas(gcf,['C:\Users\lt1686\Documents\GitHub\categorization\BAS_',d,'.png'])
 clr1=[252,186,3]/255; clr2=[207,78,222]/255;
 plot_stimulus(stimuli{2,3,47},clr1,clr2)
 saveas(gcf,['C:\Users\lt1686\Documents\GitHub\categorization\stimulus_',d,'.png'])
-
-%%
-c=2; draw=5; stim=49; strat=2;
-plot_samples(stimuli{c,draw,stim},samples{c,draw,strat}(:,stim),clr1,clr2)
-% saveas(gcf,['C:\Users\lt1686\Documents\GitHub\categorization\samples_',d,'.png'])
+plot_samples(stimuli{2,1,9},samples{2,1,1}(:,9),clr1,clr2)
+saveas(gcf,['C:\Users\lt1686\Documents\GitHub\categorization\samples_',d,'.png'])
