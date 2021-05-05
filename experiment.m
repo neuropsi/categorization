@@ -57,7 +57,8 @@ for category=-1:1
         disp(['(',num2str(progress),'%) simulating ',C,' category, ',...
             num2str(ndraws(draw)),' draws']);
         % pre-allocate for each sampling strategy
-        for strategy=1:2, samples{c,draw,strategy}=nan(ndraws(draw),nstimuli); end
+        if category~=1, for strategy=1:2
+            samples{c,draw,strategy}=nan(ndraws(draw),nstimuli); end; end
         for stim=1:nstim, if category==1, s=stim+nstim; else, s=stim; end
             % [1] generate the stimulus
             stimuli{c,draw,s}=generate_stimulus(category,image_size);

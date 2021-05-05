@@ -1,5 +1,5 @@
 function plot_outcomes(ndraws,outcomes,clr1,clr2)
-%% PLOT_STIMULUS  Create a figure which plots the probability of 
+%% PLOT_OUTCOMES  Create a figure which plots the probability of 
 % choosing the image category correctly under different sampling strategies.
 % 
 %   ARGS:
