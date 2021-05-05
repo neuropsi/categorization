@@ -41,7 +41,6 @@
 % choosing stripy when the true image was patchy or stripy, under a
 % specific sampling strategy (implied by the input).
 
-
 %% Outputs
 
 %   stimuli                 cell array with pixel values for all stimuli
